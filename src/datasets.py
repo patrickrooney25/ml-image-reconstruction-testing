@@ -4,6 +4,23 @@ import torch
 import torchvision.datasets as datasets
 import torchvision.transforms as transforms
 import numpy as np
+import urllib.request
+import torchvision.datasets as datasets
+
+# Set User-Agent to prevent HTTP 403 Forbidden errors
+opener = urllib.request.build_opener()
+opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+urllib.request.install_opener(opener)
+
+# High-reliability mirror list
+datasets.MNIST.mirrors = [
+    'https://huggingface.co/datasets/mnist/mnist/raw/main/',
+    'https://ossci-datasets.s3.amazonaws.com/mnist/',
+]
+datasets.FashionMNIST.mirrors = [
+    'https://huggingface.co/datasets/fashion_mnist/raw/main/',
+    'https://ossci-datasets.s3.amazonaws.com/fashion-mnist/',
+]
 
 def load_data(dataset_name='mnist', data_dir='./data'):
     """
